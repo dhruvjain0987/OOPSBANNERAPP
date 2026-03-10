@@ -1,28 +1,15 @@
 package src;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class OopsBannerApp {
 
-    static class CharacterPatternMap {
-        private char character;
-        private String[] pattern;
+    public static Map<Character, String[]> createBannerMap() {
 
-        public CharacterPatternMap(char character, String[] pattern) {
-            this.character = character;
-            this.pattern = pattern;
-        }
+        Map<Character, String[]> map = new HashMap<>();
 
-        public char getCharacter() {
-            return character;
-        }
-
-        public String[] getPattern() {
-            return pattern;
-        }
-    }
-
-    public static void main(String[] args) {
-
-        CharacterPatternMap o = new CharacterPatternMap('O', new String[]{
+        map.put('O', new String[]{
                 "  ***  ",
                 " *   * ",
                 "*     *",
@@ -32,7 +19,7 @@ public class OopsBannerApp {
                 "  ***  "
         });
 
-        CharacterPatternMap p = new CharacterPatternMap('P', new String[]{
+        map.put('P', new String[]{
                 "*****  ",
                 "*   *  ",
                 "*   *  ",
@@ -42,7 +29,7 @@ public class OopsBannerApp {
                 "*      "
         });
 
-        CharacterPatternMap s = new CharacterPatternMap('S', new String[]{
+        map.put('S', new String[]{
                 " ***** ",
                 "*      ",
                 "*      ",
@@ -52,13 +39,23 @@ public class OopsBannerApp {
                 "*****  "
         });
 
-        CharacterPatternMap[] letters = {o, o, p, s};
+        return map;
+    }
+
+    public static void main(String[] args) {
+
+        Map<Character, String[]> bannerMap = createBannerMap();
+
+        char[] word = {'O', 'O', 'P', 'S'};
 
         for (int i = 0; i < 7; i++) {
+
             StringBuilder line = new StringBuilder();
-            for (CharacterPatternMap letter : letters) {
-                line.append(letter.getPattern()[i]).append("  ");
+
+            for (char c : word) {
+                line.append(bannerMap.get(c)[i]).append("  ");
             }
+
             System.out.println(line);
         }
     }
